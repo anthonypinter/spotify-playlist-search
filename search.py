@@ -11,7 +11,6 @@ from sklearn.cluster import KMeans
 from scipy.spatial import distance
 import lyricsgenius
 
-
 scope = 'user-library-read'
 
 sp = spotipy.Spotify(
@@ -31,6 +30,7 @@ search_term = 'funeral'
 ###################
 
 playlist = sp.search(search_term, limit=limit, offset=0, type='playlist', market=None)
+print(playlist)
 # search(q, limit, offset, type, market)
 ## q is the search term or terms
 ## limit is the number of results requested
@@ -38,8 +38,11 @@ playlist = sp.search(search_term, limit=limit, offset=0, type='playlist', market
 ## type is the type of thing being search for
 ## market is used if you want to constrain to a particular countryt
 
-out_columns = ['PlaylistName', 'PlaylistURL', 'PlaylistID', 'Number','Owner', 'OwnerURL', 'Number of Tracks', 'Description', 'Collaborative', 'ImageURL']
+out_columns = ['PlaylistName', 'PlaylistURL', 'PlaylistID', 'Followers', 'NumberTracks', 'Duration', 'Owner', 'OwnerURL', 'Number of Tracks', 'Description', 'Collaborative', 'ImageURL']
 out = pd.DataFrame(columns=out_columns)
+
+song_columns = ['PlaylistID', 'Song', 'SongURI', 'PreviewLink', 'Album', 'Artist', 'Genres', 'BigAlbumArt', 'SmallAlbumArt', 'Danceability', 'Energy', 'Key', 'Loudness', 'Mode', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence', 'Tempo', 'Duration', 'TimeSignature']
+song_df = pd.DataFrame(columns=song_columns)
 
 while limit_count < limit:
   #print(playlist['playlists']['items'])
@@ -55,45 +58,36 @@ while limit_count < limit:
   playlist_url = playlist['playlists']['items'][limit_count]['external_urls']['spotify']
   image_url = playlist['playlists']['items'][limit_count]['images'][0]['url']
   track_url = playlist['playlists']['items'][limit_count]['tracks']['href']
-  #print('*****************')
 
   playlist_id = playlist['playlists']['items'][limit_count]['id']
+  playlist_data = sp.playlist(playlist_id)
+  followers = playlist_data['followers']['total']
 
   number = playlist['playlists']['items'][limit_count]['tracks']['total']
-
-  playlist_info = [playlist_name, playlist_url, playlist_id, number, owner, owner_url, num_tracks, description, collaborative, image_url]
-
-  out.loc[len(out.index)] = playlist_info
-  #print(out)
-  out.to_csv('out.csv')
-  out.to_json('out.json')
-  #print(sp.playlist_items(playlist_id, limit=1))
-
   
   #print(playlist['playlists']['items'][limit_count]['name'])
   #print(playlist['playlists']['items'][limit_count]['description'])
   #print(playlist['playlists']['items'][limit_count]['external_urls']['spotify'])
-  limit_count += 1
 
+  total_duration = 0
 
-#then, we'll cycle through the out and use the playlist ID value to get the tracks from each playlist.
-
-song_columns = ['PlaylistID', 'Song', 'SongURI', 'PreviewLink', 'Album', 'Artist', 'BigAlbumArt', 'SmallAlbumArt', 'Danceability', 'Energy', 'Key', 'Loudness', 'Mode', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence', 'Tempo', 'Duration', 'TimeSignature']
-song_df = pd.DataFrame(columns=song_columns)
-
-for index, row in out.iterrows():
-  pid = out['PlaylistID'].loc[out.index[index]]
-  size = out['Number'].loc[out.index[index]] ## this will be a problem if the number is greater than 100
+  #size = out['Number'].loc[out.index[index]] ## this will be a problem if the number is greater than 100
   
   y = 0
 
-  while y < size:
-    x = (sp.playlist_items(pid, limit=100))
+  while y < number:
+    x = (sp.playlist_items(playlist_id, limit=100))
     song_id = x['items'][y]['track']['id']
 
     y +=1
 
     results = sp.track(song_id)
+    #print(results['duration_ms'])
+    total_duration = total_duration + results['duration_ms']
+    album = sp.album(results['album']['external_urls']['spotify']) 
+
+    
+    #print(album['genres'])
         
     artist_name = results['album']['artists'][0]['name']
     album_name = results['album']['name']
@@ -101,7 +95,9 @@ for index, row in out.iterrows():
     small_album_art = results['album']['images'][2]['url']
     song_name = results['name']
     song_uri = results['uri']
+    duration = results['duration_ms']
     preview_link = results['preview_url']
+    genre = album['genres']
 
     #audio_analysis = sp.audio_analysis(song_uri)
     # probably don't need this ^
@@ -122,32 +118,31 @@ for index, row in out.iterrows():
     duration = audio_features[0]['duration_ms']
     time_signature = audio_features[0]['time_signature']
 
-
-    ## Leaving this here for now... just in case.
-    # ------------------------- GENIUS LYRIC PULL
-
-    #artist = genius.search_artist("Say Anything", max_songs=5)
-    #song = artist.song("Alive With the Glory of Love")
-    #artist = genius.search_artist("Say Anything", max_songs=5)
-    #try:
-            #song = genius.search_song(song_name, artist_name)
-            #lyrics_new_line_breaks = song.lyrics
-            #lyrics = lyrics_new_line_breaks.replace("\n", " ")
-    #except:
-            #lyrics = "NO LYRICS"
-    #print(lyrics_new_line_breaks)
-
-    
-    #print(lyrics)
-
-    #song.save_lyrics()  
-
-    # ------------------------- OUT DF COMPOSITION
-
-    song_array = [pid, song_name, song_uri, preview_link, album_name, artist_name, big_album_art, small_album_art, danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, duration, time_signature]
+    song_array = [playlist_id, song_name, song_uri, preview_link, album_name, artist_name, genre, big_album_art, small_album_art, danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, duration, time_signature]
 
     song_df.loc[len(song_df.index)] = song_array
 
-song_df.to_csv('songdf.csv')
-song_df.to_json('songdf.json')
-    
+    song_df.to_csv('songdf.csv')
+    song_df.to_json('songdf.json')
+
+  playlist_info = [playlist_name, playlist_url, playlist_id, followers, number, total_duration, owner, owner_url, num_tracks, description, collaborative, image_url]
+
+  out.loc[len(out.index)] = playlist_info
+  #print(out)
+  out.to_csv('out.csv')
+  out.to_json('out.json')
+  #print(sp.playlist_items(playlist_id, limit=1))
+
+  limit_count += 1
+
+
+
+#print(sp.playlist('https://open.spotify.com/playlist/37i9dQZF1EJLSui5aWyVII?si=f7531b1d341e46b1'))
+
+'''
+
+Info about playlist creation and creator -- 
+We can get (what I think) is a proxy for algorithm or not (is it created by an account or by Spotify)
+We can get collaborative or not (and/or proxies for collaborative or not, like who added each song to the playlist)
+There are ways to identify if it is a blend or not (but I don't think we'll get any of those in our search -- they have very specific naming conventions)
+'''
