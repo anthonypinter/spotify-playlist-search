@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* light pink 239, 223, 223 */
+        /* dark red 128, 0, 0 */
+
+        html {
+            background-color: black;
+            font-family: Helvetica, sans-serif;
+            font-size: 1.5vw;
+            /* font-weight: bold; */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 90px;
+            
+        }
+
+        .album-cover {
+            width: 90px;
+            height: auto;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .enlarged {
+            transform: scale(3);
+        }
+
+        .nav-bar {
+            margin: 20px;
+            display: flex;
+            justify-content: center;            
+        }
+
+
+        .nav-link {
+            margin: 1vw 1vw 0 1vw;
+            
+            background-color: rgb(239, 223, 223);
+            color: rgb(128,0,0);
+            border-radius: 10%;
+            padding: 1vw;
+            text-decoration: none;
+        }
+
+        .nav-link:hover {
+            background-color: rgb(128,0,0);
+    
+            color: rgb(239, 223, 223);
+        }
+        
+
+        p {
+            margin: 0px;
+            text-align: center;
+        }
+
+        /* -------------- -*/
+        .scrolling-banner {
+            overflow: hidden;
+            color: #fff;
+            margin-top: 10px;
+            padding: 15px;
+            
+        }
+
+        .nav-link-no-hover {
+            margin: 1vw 1vw 0 1vw;
+            
+            background-color: rgb(128,0,0);
+            color: rgb(239, 223, 223);
+            border-radius: 8px;
+            padding: 1vw;
+            text-decoration: none;
+        }
+
+        @keyframes scrollText {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-250%);
+            }   
+        }
+
+        .description {
+            background-color: rgb(40, 42, 42);
+            border-radius: 8px;
+            width: 400px;
+            color: rgb(239, 223, 223);
+            padding: 20px;
+            
+        }
+    </style>
+    <title>Jukebox Album Display</title>
+</head>
+<body>
+    
+<div class="description">
+    <p>This musical interface was made as an installation looking at the idea of breakup music. A seamless jukebox that allows users to interact with and listen to what others have determined are breakup songs to them. Logging in will authorize this application to create a player instance connected to your spotify and play songs from our curated playlist. Login below to get started. Created by Jack Manning and Anthony Pinter</p>
+</div>
+
+<div class="nav-bar">
+    <div class="nav-link-no-hover">Certain Songs are Cursed</div>
+    <a class="nav-link" href="/">Home</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-link" href="JACKPUTALINKHEREPLEASE">Jukebox</a>
+</div>
+
+
+</body>
+</html>

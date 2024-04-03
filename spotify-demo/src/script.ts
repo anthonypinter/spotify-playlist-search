@@ -14,10 +14,20 @@ if (!code) {
 
 // jukebox code starts below here
 
+let counterElement = document.getElementById('counter');
 let count = 0;
 const lastKeysPressed: any = [];
 let input: any = 0;
 let queue: any = [];
+
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
+
 
 async function player() {
     if (queue.length == 0) {
@@ -28,6 +38,8 @@ async function player() {
     if (playback["is_playing"] === false) {
         let track = queue.shift();
         data["uris"] = [track];
+        sleep(5000); // this delays play, I think. In ms.
+        
         play(accessToken, JSON.stringify(data));
         
     }
@@ -42,13 +54,13 @@ async function player() {
         // Increment the counter on numeric keypress
         count++;
         lastKeysPressed.push(event.key);
-        //counterElement.innerText = count;
+        counterElement.innerText += event.key;
     }
     if (event.key.toUpperCase() === "R") {
         // Reset the count when the "R" key is pressed
         count = 0;
         lastKeysPressed.length = 0;
-        //counterElement.innerText = count;
+        counterElement.innerText = '';
     }
    if (count === 3) {
     count = 0;
@@ -72,6 +84,7 @@ async function player() {
     // console.log(data)
     
     lastKeysPressed.length = 0;
+    counterElement.innerText = ''
     //counterElement.innerText = count;
     
     }

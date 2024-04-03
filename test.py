@@ -10,6 +10,9 @@ import csv
 from sklearn.cluster import KMeans
 from scipy.spatial import distance
 import lyricsgenius
+import requests
+from PIL import Image
+from io import BytesIO
 
 scope = 'user-library-read'
 
@@ -24,8 +27,21 @@ sp = spotipy.Spotify(
 # print(x)
 # print(x['genres'])
 
-#y = sp.playlist_items('https://open.spotify.com/playlist/5zTUX59PIGj24TuLWBxnQC?si=434565dc34e94139', offset=99)
-#print(y)
+y = sp.playlist_items('https://open.spotify.com/playlist/5zTUX59PIGj24TuLWBxnQC?si=4b8d0255c22c4fa4', offset=99)
+
+x = 100
+
+for item in y['items']:
+    url = item['track']['album']['images'][0]['url']
+    response = requests.get(url)
+    if response.status_code == 200:
+      # Use PIL to open the image from the bytes content
+      image = Image.open(BytesIO(response.content))
+      path = str(x) + ".jpg"
+      # Save the image to the specified path
+      image.save(path)
+      x+=1
+    
 
 #playlist_songs = []
 
@@ -35,13 +51,3 @@ sp = spotipy.Spotify(
 
 #print(playlist_songs)
 #print(len(playlist_songs))
-
-x = 100
-track_index = []
-while x <= 271:
-    track_index.append(x)
-    x += 1
-
-
-print(len(track_index))
-print(track_index)
