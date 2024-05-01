@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         /* light pink 239, 223, 223 */
         /* dark red 128, 0, 0 */
@@ -13,16 +15,24 @@
             font-size: 1.5vw;
             /* font-weight: bold; */
         }
+
+        body {
+            margin:0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .image-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 90px;
+            width:90%;
+            padding:4.5vw 1vw 5vw 1vw;
             
         }
 
         .album-cover {
-            width: 90px;
+            width: 6vw;
             height: auto;
             transition: transform 0.5s ease-in-out;
         }
@@ -31,7 +41,7 @@
             transform: scale(3);
         }
 
-        .nav-bar {
+        /*.nav-bar {
             margin: 20px;
             display: flex;
             justify-content: center; 
@@ -63,7 +73,7 @@
             background-color: rgb(128,0,0);
     
             color: rgb(239, 223, 223);
-        }
+        }*/
         
 
         p {
@@ -94,17 +104,103 @@
             animation: scrollText linear infinite;
             margin: 10px 0;            
         }
+        .nav-bar-container{
+            z-index:1000;
+            position: sticky;
+            width:95%;
+            display:flex;
+            flex-direction:row;
+            left:0;
+            top:0;
+            padding: 1vw 0vw 1vw 0vw;
+            background-color: black;
+        }
+        .nav-bar {
+            margin: 0 0 0 2.5vw;
+            display: flex;
+            justify-content: center;
+            height:100%;
+        }
+
+
+        .nav-link {
+            margin: 10px 0vw 10px 0vw;
+            font-weight: bold;
+            font-size: 19px;
+            background-color: transparent;
+            color: rgb(239, 223, 223);
+            border-radius: 10%;
+            padding: 18px;
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .nav-link:hover {
+            color: rgb(128,0,0);
+        }
+
+        .on-page{
+            color: rgb(128,0,0);
+        }
+
+        .round-button {
+            --bg-size: 400%;
+            --color-one: rgb(239, 223, 223);
+            --color-two: rgb(128, 0, 0);
+            font-size: clamp(2rem, 20vmin, 5rem);
+            background: linear-gradient(
+                90deg,
+                var(--color-one),
+                var(--color-two),
+                var(--color-one)
+              ) 0 0 / var(--bg-size) 5%;
+            color: black;
+            animation: move-bg 26s infinite linear;
+            
+            box-sizing: border-box;
+            display:block;
+            width:45px;
+            height:45px;
+            margin:auto auto auto 1.5vw;
+            padding-top: 12px;
+            line-height: 5px;
+            border: 0px solid white;
+            border-radius: 50%;
+            color:rgb(239, 223, 223);
+            text-align:center;
+            text-decoration:none;
+            background-color: solid black;
+            font-size:20px;
+            font-weight:bold;
+            transition: all 0.3s ease;
+        }
+        .round-button:hover {
+            background-color: rgb(239, 223, 223);
+	        box-shadow: 0px 0px 10px rgb(239, 223, 223);
+	        text-shadow: 0px 0px 10px rgb(239, 223, 223);
+        }
     </style>
     <title>Jukebox Album Display</title>
 </head>
 <body>
+
+    <div class="nav-bar-container">
+        <div class="nav-bar">
+            <a class="nav-link on-page" href="index.html">HOME</a>
+            <a class="nav-link" href="about.html">ABOUT</a>
+            <a class="nav-link" href="https://docs.google.com/forms/d/1KInCehTTZ-uSC-_DHUe5xv85l8g6AJ5Noz1d7AtyI0Y/viewform?edit_requested=true">CONTRIBUTE</a>
+            <!--<a class="nav-link" href="JACKPUTALINKHEREPLEASE">Jukebox</a>-->
+            <!--<a class="play-button-a" href="thisGoesToJukebox"><p class="triangle-right"></p><span class="dot"></span></a>-->
+            <a href="#" class="round-button"><i class="fa fa-play fa-1x"></i></a>
+        </div>
+    </div> 
     <!-- <div class="text-box">
         <p class="text">Text goes here</p>
     </div> -->
-    <div class="scrolling-banner">
+    <!--<div class="scrolling-banner">
         <div class="banner-content">
            
-        </div>
+        </div>-->
 <div class="image-container" id="imageContainer">
     <!-- Your images go here -->
     <!-- Example image tag: <img class="image" src="path/to/your/image.jpg" alt="Image"> -->
@@ -255,12 +351,6 @@
     <img class="album-cover" src="143.jpg" alt="album cover test">
 </div>
 
-<div class="nav-bar">
-    <div class="nav-link-no-hover">Certain Songs are Cursed</div>
-    <a class="nav-link" href="/">Home</a>
-    <a class="nav-link" href="about.html">About</a>
-    <a class="nav-link" href="JACKPUTALINKHEREPLEASE">Broken Hearts Jukebox</a>
-</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

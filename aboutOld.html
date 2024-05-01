@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* light pink 239, 223, 223 */
+        /* dark red 128, 0, 0 */
+
+        html {
+            background-color: black;
+            font-family: Helvetica, sans-serif;
+            font-size: 1.5vw;
+            /* font-weight: bold; */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 90px;
+            
+        }
+
+        .album-cover {
+            width: 90px;
+            height: auto;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .enlarged {
+            transform: scale(3);
+        }
+
+        .nav-bar {
+            margin: 10px 0px 20px 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+
+        .nav-link {
+            margin: 1vw 0vw 1vw 0vw;
+            
+            background-color: transparent;
+            color: rgb(239, 223, 223);
+            border-radius: 10%;
+            padding: .8vw;
+            text-decoration: none;
+        }
+
+        .nav-link:hover {
+            color: rgb(128,0,0);
+        }
+        
+
+        p {
+            margin: 0px;
+            color: rgb(239, 223, 223)
+        }
+
+        /* -------------- -*/
+        .scrolling-banner {
+            overflow: hidden;
+            color: #fff;
+            margin-top: 10px;
+            padding: 15px;
+            
+        }
+
+        /*.nav-link-no-hover {
+            margin: 1vw 1vw 0 1vw;
+            
+            background-color: rgb(128,0,0);
+            color: rgb(239, 223, 223);
+            border-radius: 8px;
+            padding: 1vw;
+            text-decoration: none;
+        }*/
+
+        @keyframes scrollText {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-250%);
+            }   
+        }
+
+        /*.description {
+            background-color: rgb(40, 42, 42);
+            border-radius: 8px;
+            width: 400px;
+            color: rgb(239, 223, 223);
+            padding: 20px;
+            
+        }*/
+
+        /*---------------------*/
+
+        .gradient-test-text{
+            margin: 8vw auto 5vw auto;
+            line-height: 1;
+            --randomNumber: random(0,255);
+            --bg-size: 400%;
+            --color-one: rgb(239, 223, 223);
+            --color-two: rgb(128, 0, 0);
+            font-size: clamp(3rem, 30vmin, 7.5rem);
+            background: linear-gradient(
+                90deg,
+                var(--color-one),
+                var(--color-two),
+                var(--color-one)
+              ) 0 0 / var(--bg-size) 100%;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: move-bg 16s infinite linear;
+        }
+        @keyframes move-bg {
+            to {
+                background-position: var(--bg-size) 0;
+            }
+        }
+        
+        .dot {
+            --bg-size: 400%;
+            --color-one: rgb(239, 223, 223);
+            --color-two: rgb(128, 0, 0);
+            font-size: clamp(2rem, 20vmin, 5rem);
+            background: linear-gradient(
+                90deg,
+                var(--color-one),
+                var(--color-two),
+                var(--color-one)
+              ) 0 0 / var(--bg-size) 100%;
+            color: transparent;
+            animation: move-bg 20s infinite linear;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            display: inline-block;
+            position:relative;
+            padding:1vw;
+        }
+        .nav-bar-container{
+            position:absolute;
+            display:flex;
+            flex-direction:row;
+            left:0;
+            top:0;
+        }
+        .play-button-container{
+            padding:20px;
+        }
+        .play-button-a{
+            height:auto;
+            padding: 10px;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .triangle-right {
+            background-color: transparent;
+            color: rgb(239, 223, 223);
+            position:absolute;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-left: 18px solid rgb(239, 223, 223);
+            border-bottom: 10px solid transparent;
+            z-index: 1000;
+        }
+        a{
+            font-size:17px;
+        }
+        hr{
+            width:95%;
+            color: rgb(239, 223, 223);
+        }
+        .p-about{
+            color: rgb(239, 223, 223);
+            font-size:17px;
+            width:95%;
+            text-align: left;
+        }
+        .description{
+            padding: 3vw;
+            display: flex;
+            flex-direction: row;
+            font-size: 2.8vw;
+            width: 85%;
+        }
+        .description-right{
+            font-size: 1.2vw;
+            padding:2vw
+        }
+        .description-left{
+            padding: 10vw 2vw 2vw 2vw;
+            max-width: 60%;
+        }
+    </style>
+    <title>Jukebox Album Display</title>
+</head>
+<body>
+<div class="nav-bar-container">
+    <div class="nav-bar">
+        <a class="nav-link" href="/">home</a>
+        <a class="nav-link" href="about.html">about</a>
+        <!--<a class="nav-link" href="JACKPUTALINKHEREPLEASE">Jukebox</a>-->
+        <a class="play-button-a" href="thisGoesToJukebox"><p class="triangle-right"></p><span class="dot"></span></a>
+    </div>
+</div> 
+<h2 class="gradient-test-text">CERTAIN<br>SONGS ARE<br>CURSED</h2>
+<p class="p-about">about</p>
+<hr>
+<div class="description">
+    <div class="description-left">
+        <p>Certain songs are cursed. They hang out uninvited in your head. There’s who you want / try to be, and then there’s who you really are, and these are the songs that make the wedge that splits the two and shows you the difference. They’ll remind you, with pin-sharp accuracy, of the smell of ex-lovers, the laughter of old friends, of lost atmospheres and environments and scenery and pointless detail, and every time you hear them by chance (and it’s always by chance) it’s akin to a need, scratching at a part of your soul that scientists have yet to document.</p>
+        /*This musical interface was made as an installation looking at the idea of breakup music. A seamless jukebox that allows users to interact with and listen to what others have determined are breakup songs to them. Logging in will authorize this application to create a player instance connected to your spotify and play songs from our curated playlist. Login below to get started. Created by Jack Manning and Anthony Pinter*/
+    </div>
+    <div class="description-right">
+        <p>Certain Songs are Cursed is a creative art and scholarly research project housed at the ATLAS Institute at the University of Colorado Boulder and directed by Anthony Pinter. The project explores people's memories of their past relationships and the songs that surface those memories. Each song in the project's collection is someone's break-up song or the song that reminds them of their ex-lover or ex-relationship.</p> 
+        <br><br>
+        <p>For some, the memory is good – a warm comforter of emotions brought on by the memory of a happy moment in the relationship. For others, the memory brings on sudden feelings of sadness – an unhappy reminder of when and why things fell apart, in turn, a reminder of when they were happier than they might be now.</p>
+        <br><br>
+        <p>Exploring the collection through a myriad of physical and virtual jukeboxes, the viewer is treated to songs and memories that are sometimes discordant – the happiest of songs, delving up the saddest of memories. At its core, the project is about how we build relationships with other people, represent those relationships through digital possessions like music, and then contend with the remnants of those relationships long after they have ended.</p>
+        <br><br>
+        <p>The project's scholarly component has been published in venues such as the ACM's Conference on Computer-Supported Cooperative Work and Social Computing and contributes to our understanding of how to design more compassionate algorithmic systems to help people manage their data and identities in the wake of sensitive life experiences online.</p>
+        <br><br>
+        <p>Certain Songs are Cursed has been supported by the University of Colorado Boulder's Center for Humanities and the Arts.
+
+    </div>
+</div>
+
+</body>
+</html>
