@@ -51,11 +51,9 @@
         .nav-link {
             margin: 10px 0vw 10px 0vw;
             font-weight: bold;
-            font-size: 19px;
             background-color: transparent;
             color: rgb(239, 223, 223);
             border-radius: 10%;
-            padding: 18px;
             text-decoration: none;
             transition: color 0.2s ease-in-out;
         }
@@ -234,7 +232,7 @@
             font-weight: bold;
         }
         .text-justify-align{
-            font-size: 1vw;
+            font-size: 16px;
             text-align: justify;
             padding: 1vw 0 1vw 0;
         }
@@ -300,7 +298,7 @@
             flex-direction: column;
         }
         .people-text{
-            font-size:1vw;
+            font-size:18px;
             text-align:left;
             padding: 0vw 0vw 1vw 0vw;
             
@@ -315,7 +313,7 @@
             width:94%;
         }
         .title-people{
-            font-size:1.2vw;
+            font-size:19px;
             font-weight:bold;
             text-align:left;
             padding: 2vw 0 .5vw 2vw;
@@ -381,6 +379,128 @@
             -webkit-text-stroke-color: rgb(239, 223, 223);
             font-size: clamp(3rem, 30vmin, 7.5rem);
         }
+        .hidden{
+            display:none;
+        }
+        .hidden-smaller{
+            display:none;
+        }
+        .hidden-title{
+            display:none;
+        }
+
+        @media only screen and (min-width: 1180px){
+            .nav-link{
+                font-size: 18px;
+                padding: 18px;
+            }
+        }
+
+        @media only screen and (max-width: 1180px){
+            .nav-link{
+                font-size: 16px;
+                padding: 15px;
+            }
+            .people-text{
+                font-size:16px;
+            }
+            .title{
+                font-size:17px;
+            }
+            .title-people{
+                font-size:17px;
+            }
+            .text-justify-align{
+                font-size: 15px;
+            }
+            .gradient-test-text{
+                font-size: clamp(3.5rem, 35vmin, 8.3rem);
+            }
+        }
+
+        @media only screen and (max-width: 810px){
+            .nav-link{
+                font-size: 15px;
+                padding: 12px;
+            }
+            .people-text{
+                font-size:14px;
+            }
+            .title{
+                font-size:15px;
+            }
+            .title-people{
+                font-size:15px;
+            }
+            .text-justify-align{
+                font-size: 14px;
+            }
+            .hidden{
+                display: block;
+            }
+            .hidden-smallscreen{
+                display:none;
+            }
+            .hidden-title{
+                display:block;
+            }
+            .gradient-test-text{
+                font-size: clamp(4rem, 40vmin, 10rem);
+            }
+        }
+        @media only screen and (max-width: 600px){
+            .hidden-smallscreen-smaller{
+                display:none;
+            }
+            .hidden-smaller{
+                display:block;
+            }
+            .person-image{
+                height: 55vw;
+            }
+            .people-text{
+                padding: 0vw 0vw 4vw 0vw;
+            }
+            .title-people{
+                padding: 9vw 0 .5vw 0vw;
+            }
+        }
+        @media only screen and (max-width: 400px){
+            .nav-link{
+                font-size:15px;
+                padding:8px;
+            }
+            .person-image{
+                height:200px;
+            }
+            .text-justify-align{
+                text-align: left;
+            }
+            .gradient-test-text{
+                margin: 1vw auto 4vw 5vw;
+            }
+            .nav-bar{
+                display:flex;
+                flex-direction: column;
+            }
+            .nav-link{
+                margin: 4px 0vw 4px 0vw;
+            }
+            .nav-bar-container{
+                padding: 1vw 0vw 7vw 0vw;
+            }
+        }
+        @media only screen and (max-width: 250px){
+            .person-image{
+                width:100%;
+                height:auto;
+            }
+        }
+
+        .left-align{
+            width:90%;
+        }
+
 
     </style>
     <title>Jukebox Album Display</title>
@@ -396,7 +516,8 @@
         <a href="#" class="round-button"><i class="fa fa-play fa-1x"></i></a>
     </div>
 </div> 
-<h2 class="gradient-test-text">CERTAIN<br>SONGS<br>ARE CURSED</h2>
+<h2 class="gradient-test-text hidden-smallscreen">CERTAIN<br>SONGS<br>ARE CURSED</h2>
+<h2 class="gradient-test-text hidden">CERTAIN<br>SONGS<br>ARE<br>CURSED</h2>
 
 <div class="divide">
     <div class="blank">
@@ -406,8 +527,16 @@
         </p>
         <p class="text-justify-align">For some, the memory is good – a warm comforter of emotions brought on by the memory of a happy moment in the relationship. For others, the memory brings on sudden feelings of sadness – an unhappy reminder of when and why things fell apart, in turn, a reminder of when they were happier than they might be now.  
         </p>
+        <p class="text-justify-align hidden">Exploring the collection through a myriad of physical and virtual jukeboxes, the viewer is treated to songs and memories that are sometimes discordant – the happiest of songs, delving up the saddest of memories. At its core, the project is about how we build relationships with other people, represent those relationships through digital possessions like music, and then contend with the remnants of those relationships long after they have ended. 
+        </p>
+        <p class="text-justify-align hidden">The project's scholarly component has been published in venues such as the ACM's Conference on Computer-Supported Cooperative Work and Social Computing and contributes to our understanding of how to design more compassionate algorithmic systems to help people manage their data and identities in the wake of sensitive life experiences online.
+        </p>
+        <p class="text-justify-align hidden">Certain Songs are Cursed has been supported by the University of Colorado Boulder's Center for Humanities and the Arts.
+        </p>
+        <p class="text-justify-align hidden"><em>It’s hard and horrible that a bunch of words, and a melody, can make you feel like that.</em>
+            </p>
     </div>
-    <div class="below">
+    <div class="below hidden-smallscreen">
         <br>
         <br>
         <p class="text-justify-align">Exploring the collection through a myriad of physical and virtual jukeboxes, the viewer is treated to songs and memories that are sometimes discordant – the happiest of songs, delving up the saddest of memories. At its core, the project is about how we build relationships with other people, represent those relationships through digital possessions like music, and then contend with the remnants of those relationships long after they have ended. 
@@ -420,12 +549,12 @@
             </p>
     </div>
 </div>
-<div class="people-box">
+<div class="people-box hidden-smallscreen-smaller">
     <p class="title-people">PEOPLE</p>
     <div class="people-flex-columns">
         <div class="people-flex-rows">
             <div class="person">
-                <img class="person-image" src="person.jpg" alt="Anthony Pinter">
+                <img class="person-image" src="anthonyPhotoSquare.png" alt="Anthony Pinter">
                 <p class="people-text">Anthony Pinter</p>
             </div>
             <div class="person">
@@ -433,7 +562,7 @@
                 <p class="people-text">Jack Manning</p>
             </div>
             <div class="person">
-                <img class="person-image" src="person.jpg" alt="Lila Anson">
+                <img class="person-image" src="lilaPhotoSquare.png" alt="Lila Anson">
                 <p class="people-text">Lila Anson</p>
             </div>
         </div>
@@ -447,6 +576,29 @@
                 <p class="people-text">Katha Patel</p>
             </div>
         </div>
+    </div>
+</div>
+<div class="hidden-smaller left-align">
+    <p class="title-people">PEOPLE</p>
+    <div class="person">
+        <img class="person-image" src="anthonyPhotoSquare.png" alt="Anthony Pinter">
+        <p class="people-text">Anthony Pinter</p>
+    </div>
+    <div class="person">
+        <img class="person-image" src="jackPhotoSquare.png" alt="Jack Manning">
+        <p class="people-text">Jack Manning</p>
+    </div>
+    <div class="person">
+        <img class="person-image" src="lilaPhotoSquare.png" alt="Lila Anson">
+        <p class="people-text">Lila Anson</p>
+    </div>
+    <div class="person line-two">
+        <img class="person-image" src="martiaPhotoSquare.png" alt="Martia Williams">
+        <p class="people-text">Martia Williams</p>
+    </div>
+    <div class="person line-two">
+        <img class="person-image" src="kathaPhotoSquare.png" alt="Katha Patel">
+        <p class="people-text">Katha Patel</p>
     </div>
 </div>
 </body>
