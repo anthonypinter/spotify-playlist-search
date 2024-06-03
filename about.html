@@ -4,25 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
     <style>
         /* light pink 239, 223, 223 */
         /* dark red 128, 0, 0 */
 
-        html {
-            background-color: black;
-            font-family: Helvetica, sans-serif;
-            font-size: 1.5vw;
-            /* font-weight: bold; */
-        }
-
-        body {
-            margin:0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .image-container {
+        /*.image-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -39,9 +26,42 @@
         .enlarged {
             transform: scale(3);
         }
+        
+        .nav-link-no-hover {
+            margin: 1vw 1vw 0 1vw;
+            
+            background-color: rgb(128,0,0);
+            color: rgb(239, 223, 223);
+            border-radius: 8px;
+            padding: 1vw;
+            text-decoration: none;
+        }
+        .description {
+            background-color: rgb(40, 42, 42);
+            border-radius: 8px;
+            width: 400px;
+            color: rgb(239, 223, 223);
+            padding: 20px;
+            
+        }*/
+
+        html {
+            background-color: black;
+            font-family: Helvetica, sans-serif;
+            font-size: 1.5vw;
+            /* font-weight: bold; */
+            overflow-x: hidden;
+        }
+
+        body {
+            margin:0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
         .nav-bar {
-            margin: 0 0 0 2.5vw;
+            margin: 0 0 0 1.3vw;
             display: flex;
             justify-content: center;
             height:100%;
@@ -49,18 +69,33 @@
 
 
         .nav-link {
-            margin: 10px 0vw 10px 0vw;
+            margin: auto;
             font-weight: bold;
             background-color: transparent;
             color: rgb(239, 223, 223);
             border-radius: 10%;
             text-decoration: none;
-            transition: color 0.2s ease-in-out;
+            /*transition: color 0.2s ease-in-out;*/
         }
 
-        .nav-link:hover {
-            color: rgb(128,0,0);
+        .nav-link:not(.on-page):hover {
+            /*color: rgb(128, 0, 0);*/
+            --bg-size: 400%;
+            --color-one: rgb(239, 223, 223);
+            --color-two: rgb(128, 0, 0);
+            background: linear-gradient(
+                90deg,
+                var(--color-one),
+                var(--color-two),
+                var(--color-one)
+              ) 0 0 / var(--bg-size) 5%;
+            color: transparent;
+            /*-webkit-text-stroke:100vw;
+            -webkit-text-stroke-color: transparent;*/
+            -webkit-background-clip: text;
+            background-clip: text;
         }
+        
         
 
         p {
@@ -77,15 +112,6 @@
             
         }
 
-        /*.nav-link-no-hover {
-            margin: 1vw 1vw 0 1vw;
-            
-            background-color: rgb(128,0,0);
-            color: rgb(239, 223, 223);
-            border-radius: 8px;
-            padding: 1vw;
-            text-decoration: none;
-        }*/
 
         @keyframes scrollText {
             0% {
@@ -96,18 +122,9 @@
             }   
         }
 
-        /*.description {
-            background-color: rgb(40, 42, 42);
-            border-radius: 8px;
-            width: 400px;
-            color: rgb(239, 223, 223);
-            padding: 20px;
-            
-        }*/
-
         /*---------------------*/
 
-        .gradient-test-text{
+        .gradient-text{
             margin: 1vw auto auto 5vw;
             line-height: 1;
             --randomNumber: random(0,255);
@@ -134,26 +151,6 @@
             }
         }
         
-        .dot {
-            --bg-size: 400%;
-            --color-one: rgb(239, 223, 223);
-            --color-two: rgb(128, 0, 0);
-            font-size: clamp(2rem, 20vmin, 5rem);
-            background: linear-gradient(
-                90deg,
-                var(--color-one),
-                var(--color-two),
-                var(--color-one)
-              ) 0 0 / var(--bg-size) 100%;
-            color: transparent;
-            animation: move-bg 20s infinite linear;
-            height: 18px;
-            width: 18px;
-            border-radius: 50%;
-            display: inline-block;
-            position:relative;
-            padding:1vw;
-        }
         .nav-bar-container{
             z-index:1000;
             position: sticky;
@@ -164,27 +161,6 @@
             top:0;
             padding: 1vw 0vw 1vw 0vw;
             background-color: black;
-        }
-        .play-button-container{
-            padding:20px;
-        }
-        .play-button-a{
-            height:auto;
-            padding: 10px;
-            display:flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .triangle-right {
-            background-color: transparent;
-            color: rgb(239, 223, 223);
-            position:absolute;
-            width: 0;
-            height: 0;
-            border-top: 10px solid transparent;
-            border-left: 18px solid rgb(239, 223, 223);
-            border-bottom: 10px solid transparent;
-            z-index: 1000;
         }
         a{
             font-size:17px;
@@ -206,14 +182,6 @@
             font-size: 2.8vw;
             width: 85%;
         }
-        .description-right{
-            font-size: 1.2vw;
-            padding:2vw
-        }
-        .description-left{
-            padding: 10vw 2vw 2vw 2vw;
-            max-width: 60%;
-        }
         .top-flex{
             display: flex;
             flex-direction: row;
@@ -224,12 +192,6 @@
             font-weight:bold;
             text-align:left;
             padding: 2vw 0 0 0;
-        }
-        .text-right-align{
-            font-size: 1vw;
-            text-align: left;
-            padding: 1vw 0 1vw 0;
-            font-weight: bold;
         }
         .text-justify-align{
             font-size: 16px;
@@ -243,36 +205,15 @@
             padding: 2vw 3vw 0 3vw;
             width:94%;
         }
-        .blank{
+        .description-left{
             padding: 0 2vw 0 2vw;
             flex-basis:100%;
 
         }
-        .below{
+        .description-right{
             padding: 0 2vw 0 2vw;
             flex-basis:100%;
  
-        }
-        .square {
-            top: 10vw;
-            --bg-size: 400%;
-            --color-one: rgb(239, 223, 223);
-            --color-two: rgb(128, 0, 0);
-            font-size: clamp(2rem, 20vmin, 5rem);
-            background: linear-gradient(
-                90deg,
-                var(--color-one),
-                var(--color-two),
-                var(--color-one)
-              ) 0 0 / var(--bg-size) 100%;
-            color: transparent;
-            animation: move-bg 20s infinite linear;
-            /*have this shrink slower*/
-            height: 20vw;
-            width: 20vw;
-            display: inline-block;
-            position:relative;
-            padding:1vw;            
         }
         .name{
             font-size:6.5vw;
@@ -281,23 +222,12 @@
             top: 11.5vw;
             text-align: center;
         }
-        .right{
-            padding: 0 2vw 0 2vw;
-            flex-basis:30%;
-        }
         .on-page{
             color: rgb(128,0,0);
         }
-        .people-flex-rows{
-            display: flex;
-            flex-direction: row;
-            padding: 0vw 2vw 0 2vw;
-        }
-        .people-flex-columns{
-            display:flex;
-            flex-direction: column;
-        }
-        .people-text{
+
+
+        .person-text{
             font-size:18px;
             text-align:left;
             padding: 0vw 0vw 1vw 0vw;
@@ -305,27 +235,40 @@
         }
         .person-image{
             padding: 1vw 0vw 1vw 0vw;
-            height: 25vw;
+            height: 17vw;
             margin:auto;
         }
-        .people-box{
-            padding: 1vw 3vw 0 3vw;
-            width:94%;
-        }
-        .title-people{
+        .people-title{
             font-size:19px;
             font-weight:bold;
             text-align:left;
-            padding: 2vw 0 .5vw 2vw;
+            padding: 3vw 0 .5vw 0vw;
+
         }
         .person{
             flex-basis:100%;
         }
-        .line-two{
-            flex-basis:auto;
-            padding: 0 4.3vw 0 0;
+        .hidden-when-largescreen{
+            display:none;
         }
-        .round-button {
+        .hidden-title{
+            display:none;
+        }
+        .hidden-br{
+            display:none;
+        }
+        .people-section{
+            width:90%;
+        }
+        .people-flex{
+            display:flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .favicon-bg{
+            height:70px;
+            width:70px;
+            padding:10px;
             --bg-size: 400%;
             --color-one: rgb(239, 223, 223);
             --color-two: rgb(128, 0, 0);
@@ -338,64 +281,40 @@
               ) 0 0 / var(--bg-size) 5%;
             color: black;
             animation: move-bg 26s infinite linear;
-            
+            border-radius: 50%;
             box-sizing: border-box;
             display:block;
-            width:45px;
-            height:45px;
-            margin:auto auto auto 1.5vw;
-            padding-top: 12px;
             line-height: 5px;
             border: 0px solid white;
-            border-radius: 50%;
             color:rgb(239, 223, 223);
-            text-align:center;
             text-decoration:none;
             background-color: solid black;
-            font-size:20px;
-            font-weight:bold;
             transition: all 0.3s ease;
         }
-        .round-button:hover {
-            background-color: rgb(239, 223, 223);
-	        box-shadow: 0px 0px 10px rgb(239, 223, 223);
-	        text-shadow: 0px 0px 10px rgb(239, 223, 223);
+        .favicon{
+            height:50px;
+            width:50px;
+            pointer-events: none;
         }
-        .non-gradient-title{
-            color:rgb(239, 223, 223);
-            width:95%;
-            padding:2vw 0 0 5vw;
-            text-align: left;
-            font-weight: bold;
-            font-size: clamp(3rem, 30vmin, 7.5rem);
-        }
-        .non-gradient-title-outline{
-            color:transparent;
-            width:95%;
-            padding:0 0 0 5vw;
-            text-align: left;
-            font-weight: bold;
-            -webkit-text-stroke: 2px;
-            -webkit-text-stroke-color: rgb(239, 223, 223);
-            font-size: clamp(3rem, 30vmin, 7.5rem);
-        }
-        .hidden{
+        #drop-down{
             display:none;
+            font-size:25px;
+            margin:auto;
+            padding:6px 25px 0 .8vw;
+            cursor:pointer;
         }
-        .hidden-smaller{
-            display:none;
-        }
-        .hidden-title{
-            display:none;
-        }
-        .hidden-br{
-            display:none;
+        .drop-down-flex{
+            display:flex;
+            flex-direction: row;
         }
 
         @media only screen and (min-width: 1180px){
             .nav-link{
                 font-size: 18px;
                 padding: 18px;
+            }
+            .show-on-click{
+                display: block;
             }
         }
 
@@ -404,20 +323,32 @@
                 font-size: 16px;
                 padding: 15px;
             }
-            .people-text{
+            .person-text{
                 font-size:16px;
             }
             .title{
                 font-size:17px;
             }
-            .title-people{
+            .people-title{
                 font-size:17px;
             }
             .text-justify-align{
                 font-size: 15px;
             }
-            .gradient-test-text{
+            .gradient-text{
                 font-size: clamp(3.5rem, 35vmin, 8.3rem);
+            }
+            .favicon-bg{
+                height:66px;
+                width:66px;
+                padding:9px;
+            }
+            .favicon{
+                height:48px;
+                width:48px;
+            }
+            .show-on-click{
+                display: block;
             }
         }
 
@@ -426,60 +357,88 @@
                 font-size: 15px;
                 padding: 12px;
             }
-            .people-text{
+            .person-text{
                 font-size:14px;
             }
             .title{
                 font-size:15px;
             }
-            .title-people{
+            .people-title{
                 font-size:15px;
             }
             .text-justify-align{
                 font-size: 14px;
             }
-            .hidden{
+            .hidden-when-largescreen{
                 display: block;
             }
-            .hidden-smallscreen{
+            .hidden-when-smallscreen{
                 display:none;
             }
             .hidden-title{
                 display:block;
             }
-            .gradient-test-text{
+            .gradient-text{
                 font-size: clamp(4rem, 40vmin, 10rem);
+            }
+            .people-flex{
+                flex-direction: column;
+            }
+            .person-image{
+                width:50%;
+                height:auto;
+            }
+            .favicon-bg{
+                height:62px;
+                width:62px;
+                padding:9px;
+            }
+            .favicon{
+                height:44px;
+                width:44px;
+            }
+            .show-on-click{
+                display: block;
             }
         }
         @media only screen and (max-width: 600px){
-            .hidden-smallscreen-smaller{
-                display:none;
+            .nav-link{
+                font-size: 13px;
+                padding: 8px;
             }
-            .hidden-smaller{
-                display:block;
-            }
-            .person-image{
-                height: 55vw;
-            }
-            .people-text{
+            .person-text{
                 padding: 0vw 0vw 4vw 0vw;
             }
-            .title-people{
+            .people-title{
                 padding: 9vw 0 .5vw 0vw;
             }
+            .favicon-bg{
+                height:54px;
+                width:54px;
+                padding:7px;
+            }
+            .favicon{
+                height:40px;
+                width:40px;
+            }
+            .show-on-click{
+                display: block;
+            }
         }
-        @media only screen and (max-width: 400px){
+        @media only screen and (max-width: 405px){
             .nav-link{
                 font-size:15px;
                 padding:8px;
             }
             .person-image{
-                height:200px;
+                width:100%;
+                height:auto;
             }
             .text-justify-align{
+                /*this is where text align justify gets weird*/
                 text-align: left;
             }
-            .gradient-test-text{
+            .gradient-text{
                 margin: 1vw auto 4vw 5vw;
             }
             .nav-bar{
@@ -488,6 +447,7 @@
             }
             .nav-link{
                 margin: 4px 0vw 4px 0vw;
+                padding:10px 2px 0px 2px;
             }
             .nav-bar-container{
                 padding: 1vw 0vw 7vw 0vw;
@@ -495,6 +455,13 @@
             .hidden-br{
                 display:block;
             }
+            #drop-down{
+                display:block;
+            }
+            .show-on-click{
+                display:none;
+            }
+            
         }
         @media only screen and (max-width: 250px){
             .person-image{
@@ -503,32 +470,29 @@
             }
         }
 
-        .left-align{
-            width:90%;
-        }
-
-
     </style>
     <title>Jukebox Album Display</title>
 </head>
 <body>
 <div class="nav-bar-container">
     <div class="nav-bar">
-        <a class="nav-link" href="index.html">HOME</a>
-        <a class="nav-link on-page" href="about.html">ABOUT</a>
-        <a class="nav-link" href="https://docs.google.com/forms/d/1KInCehTTZ-uSC-_DHUe5xv85l8g6AJ5Noz1d7AtyI0Y/viewform?edit_requested=true">CONTRIBUTE</a>
-        <!--<a class="nav-link" href="JACKPUTALINKHEREPLEASE">Jukebox</a>-->
-        <!--<a class="play-button-a" href="thisGoesToJukebox"><p class="triangle-right"></p><span class="dot"></span></a>-->
-        <a href="#" class="round-button"><i class="fa fa-play fa-1x"></i></a>
+        <div class="drop-down-flex">
+        <p id="drop-down" class="not-shown">☰</p>
+        <a class="nav-link" target="blank_" href="HOME LINK"><span class="favicon-bg"><embed class="favicon" src="faviconFinal2.svg"></span></a>
+        </div>
+        <a class="nav-link show-on-click" href="HOME LINK">HOME</a>
+        <a class="nav-link on-page show-on-click" href="about.html">ABOUT</a>
+        <a class="nav-link show-on-click" target="_blank" href="https://docs.google.com/forms/d/1KInCehTTZ-uSC-_DHUe5xv85l8g6AJ5Noz1d7AtyI0Y/viewform?edit_requested=true">CONTRIBUTE</a>
+        <a class="nav-link show-on-click" target="_blank" href="put jukebox link here!!">EXPLORE</a>
     </div>
 </div> 
-<h2 class="gradient-test-text hidden-smallscreen">CERTAIN<br>SONGS<br>ARE CURSED</h2>
-<h2 class="gradient-test-text hidden">CERTAIN<br>SONGS<br>ARE<br>CURSED</h2>
+<h2 class="gradient-text hidden-when-smallscreen">CERTAIN<br>SONGS<br>ARE CURSED</h2>
+<h2 class="gradient-text hidden-when-largescreen">CERTAIN<br>SONGS<br>ARE<br>CURSED</h2>
 
 <div class="divide">
-    <div class="blank">
+    <div class="description-left">
         <p class="title">ABOUT</p>
-        <p class="text-justify-align">Certain songs are cursed. They hang out uninvited in your head. There’s who you want / try to be, and then there’s who you really are, and these are the songs that make the wedge that splits the two and shows you the difference. They’ll remind you, with pin-sharp accuracy, of the smell of ex-lovers, the laughter of old friends, of lost atmospheres and environments and scenery and pointless detail, and every time you hear them by chance (and it’s always by chance) it’s akin to a need, scratching at a part of your soul that scientists have yet to document.</p> 
+        <p class="text-justify-align"><em>Certain songs are cursed. They hang out uninvited in your head. There’s who you want / try to be, and then there’s who you really are, and these are the songs that make the wedge that splits the two and shows you the difference. They’ll remind you, with pin-sharp accuracy, of the smell of ex-lovers, the laughter of old friends, of lost atmospheres and environments and scenery and pointless detail, and every time you hear them by chance (and it’s always by chance) it’s akin to a need, scratching at a part of your soul that scientists have yet to document.</em></p> 
         <br class="hidden-br">
         <p class="text-justify-align">Certain Songs are Cursed is a creative art and scholarly research project housed at the ATLAS Institute at the University of Colorado Boulder and directed by Anthony Pinter. The project explores people's memories of their past relationships and the songs that surface those memories. Each song in the project's collection is someone's break-up song or the song that reminds them of their ex-lover or ex-relationship. 
         </p>
@@ -536,19 +500,19 @@
         <p class="text-justify-align">For some, the memory is good – a warm comforter of emotions brought on by the memory of a happy moment in the relationship. For others, the memory brings on sudden feelings of sadness – an unhappy reminder of when and why things fell apart, in turn, a reminder of when they were happier than they might be now.  
         </p>
         <br class="hidden-br">
-        <p class="text-justify-align hidden">Exploring the collection through a myriad of physical and virtual jukeboxes, the viewer is treated to songs and memories that are sometimes discordant – the happiest of songs, delving up the saddest of memories. At its core, the project is about how we build relationships with other people, represent those relationships through digital possessions like music, and then contend with the remnants of those relationships long after they have ended. 
+        <p class="text-justify-align hidden-when-largescreen">Exploring the collection through a myriad of physical and virtual jukeboxes, the viewer is treated to songs and memories that are sometimes discordant – the happiest of songs, delving up the saddest of memories. At its core, the project is about how we build relationships with other people, represent those relationships through digital possessions like music, and then contend with the remnants of those relationships long after they have ended. 
         </p>
         <br class="hidden-br">
-        <p class="text-justify-align hidden">The project's scholarly component has been published in venues such as the ACM's Conference on Computer-Supported Cooperative Work and Social Computing and contributes to our understanding of how to design more compassionate algorithmic systems to help people manage their data and identities in the wake of sensitive life experiences online.
+        <p class="text-justify-align hidden-when-largescreen">The project's scholarly component has been published in venues such as the ACM's Conference on Computer-Supported Cooperative Work and Social Computing and contributes to our understanding of how to design more compassionate algorithmic systems to help people manage their data and identities in the wake of sensitive life experiences online.
         </p>
         <br class="hidden-br">
-        <p class="text-justify-align hidden">Certain Songs are Cursed has been supported by the University of Colorado Boulder's Center for Humanities and the Arts.
+        <p class="text-justify-align hidden-when-largescreen">Certain Songs are Cursed has been supported by the University of Colorado Boulder's Center for Humanities and the Arts.
         </p>
         <br class="hidden-br">
-        <p class="text-justify-align hidden"><em>It’s hard and horrible that a bunch of words, and a melody, can make you feel like that.</em>
+        <p class="text-justify-align hidden-when-largescreen"><em>It’s hard and horrible that a bunch of words, and a melody, can make you feel like that.</em>
             </p>
     </div>
-    <div class="below hidden-smallscreen">
+    <div class="description-right hidden-when-smallscreen">
         <br>
         <br>
         <p class="text-justify-align">Exploring the collection through a myriad of physical and virtual jukeboxes, the viewer is treated to songs and memories that are sometimes discordant – the happiest of songs, delving up the saddest of memories. At its core, the project is about how we build relationships with other people, represent those relationships through digital possessions like music, and then contend with the remnants of those relationships long after they have ended. 
@@ -561,57 +525,76 @@
             </p>
     </div>
 </div>
-<div class="people-box hidden-smallscreen-smaller">
-    <p class="title-people">PEOPLE</p>
-    <div class="people-flex-columns">
-        <div class="people-flex-rows">
-            <div class="person">
-                <img class="person-image" src="anthonyPhotoSquare.png" alt="Anthony Pinter">
-                <p class="people-text">Anthony Pinter</p>
-            </div>
-            <div class="person">
-                <img class="person-image" src="jackPhotoSquare.png" alt="Jack Manning">
-                <p class="people-text">Jack Manning</p>
-            </div>
-            <div class="person">
-                <img class="person-image" src="lilaPhotoSquare.png" alt="Lila Anson">
-                <p class="people-text">Lila Anson</p>
-            </div>
+
+<div class="people-section">
+    <p class="people-title">PEOPLE</p>
+    <div class="people-flex">
+        <div class="person">
+            <!--<img class="person-image" src="./images/faces/anthonyPhotoSquare.png" alt="Anthony Pinter">-->
+            <img class="person-image" src="anthonyPhotoSquare.png" alt="Anthony Pinter">
+            <p class="person-text">Anthony Pinter</p>
         </div>
-        <div class="people-flex-rows">
-            <div class="person line-two">
-                <img class="person-image" src="martiaPhotoSquare.png" alt="Martia Williams">
-                <p class="people-text">Martia Williams</p>
-            </div>
-            <div class="person line-two">
-                <img class="person-image" src="kathaPhotoSquare.png" alt="Katha Patel">
-                <p class="people-text">Katha Patel</p>
-            </div>
+        <div class="person">
+            <!--<img class="person-image" src="./images/faces/jackPhotoSquare.png" alt="Jack Manning">-->
+            <img class="person-image" src="jackPhotoSquare.png" alt="Jack Manning">
+            <p class="person-text">Jack Manning</p>
+        </div>
+        <div class="person">
+            <!--<img class="person-image" src="./images/faces/lilaPhotoSquare.png" alt="Lila Anson">-->
+            <img class="person-image" src="lilaPhotoSquare.png" alt="Lila Anson">
+            <p class="person-text">Lila Anson</p>
+        </div>
+        <div class="person">
+            <!--<img class="person-image" src="./images/faces/martiaPhotoSquare.png" alt="Martia Williams">-->
+            <img class="person-image" src="martiaPhotoSquare.png" alt="Martia Williams">
+            <p class="person-text">Martia Williams</p>
+        </div>
+        <div class="person">
+            <!--<img class="person-image" src="./images/faces/kathaPhotoSquare.png" alt="Katha Patel">-->
+            <img class="person-image" src="kathaPhotoSquare.png" alt="Katha Patel">
+            <p class="person-text">Katha Patel</p>
         </div>
     </div>
 </div>
-<div class="hidden-smaller left-align">
-    <p class="title-people">PEOPLE</p>
-    <div class="person">
-        <img class="person-image" src="anthonyPhotoSquare.png" alt="Anthony Pinter">
-        <p class="people-text">Anthony Pinter</p>
-    </div>
-    <div class="person">
-        <img class="person-image" src="jackPhotoSquare.png" alt="Jack Manning">
-        <p class="people-text">Jack Manning</p>
-    </div>
-    <div class="person">
-        <img class="person-image" src="lilaPhotoSquare.png" alt="Lila Anson">
-        <p class="people-text">Lila Anson</p>
-    </div>
-    <div class="person line-two">
-        <img class="person-image" src="martiaPhotoSquare.png" alt="Martia Williams">
-        <p class="people-text">Martia Williams</p>
-    </div>
-    <div class="person line-two">
-        <img class="person-image" src="kathaPhotoSquare.png" alt="Katha Patel">
-        <p class="people-text">Katha Patel</p>
-    </div>
-</div>
+<br>
+<br>
+<br>
+<br>
+<script>
+    var menuShown = "false"
+    document.getElementById("drop-down").addEventListener("click", showDropDownMenu)
+    var menu = document.getElementsByClassName("show-on-click")
+    function showDropDownMenu(){
+        if(menuShown === "false"){
+            for(var i=0;i<menu.length;i+=1){
+                menu[i].style.display="block"
+            }
+            menuShown = "true"
+        }
+        else{
+            for(var i=0;i<menu.length;i+=1){
+                menu[i].style.display="none"
+            }            
+            menuShown = "false"
+        }
+    }
+    window.addEventListener("resize", checkWindowSize);
+    function checkWindowSize(){
+        var w = document.documentElement.clientWidth;
+        if(w>388){
+            for(var i=0;i<menu.length;i+=1){
+                menu[i].style.display="block"
+            } 
+            menuShown = "true"
+        }
+        else{
+            for(var i=0;i<menu.length;i+=1){
+                menu[i].style.display="none"
+            } 
+            menuShown = "false"
+        }
+    }
+
+</script>
 </body>
 </html>
